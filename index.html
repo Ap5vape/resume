@@ -19,6 +19,7 @@
       --accent-glow: rgba(56, 189, 248, 0.15);
       --tag-bg: rgba(56, 189, 248, 0.1);
       --tag-border: rgba(56, 189, 248, 0.25);
+      --success: #10b981;
     }
 
     * {
@@ -65,9 +66,9 @@
     .status-dot {
       width: 8px;
       height: 8px;
-      background-color: #10b981;
+      background-color: var(--success);
       border-radius: 50%;
-      box-shadow: 0 0 8px #10b981;
+      box-shadow: 0 0 8px var(--success);
     }
 
     h1 {
@@ -81,31 +82,34 @@
     .hero-lead {
       font-size: 1.2rem;
       color: var(--text-muted);
-      max-width: 700px;
+      max-width: 720px;
       margin-bottom: 2rem;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 1rem;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       padding: 0.75rem 1.4rem;
       border-radius: 8px;
       font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
+      cursor: pointer;
     }
 
     .btn-primary {
       background: var(--accent);
       color: #0b0f17;
+      border: 1px solid transparent;
     }
 
     .btn-primary:hover {
@@ -114,15 +118,67 @@
       box-shadow: 0 8px 20px var(--accent-glow);
     }
 
-    .btn-secondary {
+    /* Email Box Component */
+    .email-container {
+      display: inline-flex;
+      align-items: center;
       background: var(--card-bg);
-      color: var(--text-main);
       border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.35rem 0.5rem 0.35rem 1rem;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
     }
 
-    .btn-secondary:hover {
+    .email-container:hover {
+      border-color: rgba(56, 189, 248, 0.4);
       background: var(--card-hover);
-      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .email-info {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .email-info svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .email-address {
+      user-select: all;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--tag-bg);
+      color: var(--accent);
+      border-color: var(--tag-border);
+    }
+
+    .copy-btn.copied {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--success);
     }
 
     /* Sections */
@@ -146,7 +202,7 @@
       margin-top: 0.25rem;
     }
 
-    /* Grid & Media Cards */
+    /* Grid & Cards */
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -190,11 +246,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
       transition: transform 0.35s ease;
     }
 
     .card:hover .card-thumb img {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
 
     .card-body {
@@ -318,17 +375,25 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
+      align-items: center;
       justify-content: center;
     }
 
-    .footer-contacts a {
+    .footer-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       color: var(--text-muted);
       text-decoration: none;
       font-size: 0.95rem;
       transition: color 0.2s;
     }
 
-    .footer-contacts a:hover {
+    .footer-item svg {
+      color: var(--accent);
+    }
+
+    .footer-item:hover {
       color: var(--accent);
     }
 
@@ -350,15 +415,34 @@
       </div>
       <h1>Александр Понявин</h1>
       <p class="hero-lead">
-        Автор, контент-редактор и копирайтер. Готовлю аналитические лонгриды, материалы с глубоким фактчекингом, экспертные продуктовые обзоры и посты для комьюнити.
+        Автор, контент-редактор и копирайтер. Готовлю аналитические лонгриды, материалы с глубоким фактчекингом, экспертные обзоры устройств и посты для комьюнити.
       </p>
       <div class="hero-actions">
-        <a href="https://t.me/emtblds" target="_blank" class="btn btn-primary">
-          Telegram →
+        <!-- Telegram -->
+        <a href="https://t.me/твой_юзернейм" target="_blank" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+          </svg>
+          Telegram
         </a>
-        <a href="mailto:Sphonegame2005@gmail.com" class="btn btn-secondary">
-          Sphonegame2005@gmail.com
-        </a>
+
+        <!-- Почта с иконкой и кнопкой копирования -->
+        <div class="email-container">
+          <div class="email-info">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span class="email-address" id="email-text">Sphonegame2005@gmail.com</span>
+          </div>
+          <button class="copy-btn" id="hero-copy-btn" onclick="copyEmailToClipboard(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <span>Скопировать</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -374,7 +458,7 @@
         <!-- Карточка 1: Подписки -->
         <a href="https://katun24.ru/news/851239" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80" alt="Подписочная экономика" loading="lazy">
+            <img src="images/sub.jpg" alt="Как подписки незаметно стали новой строкой расходов" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -397,7 +481,7 @@
         <!-- Карточка 2: Мессенджеры -->
         <a href="https://katun24.ru/news/851242" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&w=800&q=80" alt="Голосовые и кружочки" loading="lazy">
+            <img src="images/voice.jpg" alt="Эпоха голосовых и кружочков" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -420,7 +504,7 @@
         <!-- Карточка 3: 2012-й -->
         <a href="https://katun24.ru/news/851238" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80" alt="Ностальгия по ранним соцсетям" loading="lazy">
+            <img src="images/2012.jpg" alt="Верните мой 2012-й" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -443,7 +527,7 @@
         <!-- Карточка 4: Эффект Манделы -->
         <a href="https://katun24.ru/news/851244" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=800&q=80" alt="Эффект Манделы" loading="lazy">
+            <img src="images/mandela.jpg" alt="Эффект Манделы" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -463,10 +547,10 @@
           </div>
         </a>
 
-        <!-- Карточка 5: Вейпинг (на всю ширину) -->
+        <!-- Карточка 5: Вейпинг -->
         <a href="https://katun24.ru/news/851241" target="_blank" rel="noopener noreferrer" class="card" style="grid-column: 1 / -1;">
           <div class="card-thumb" style="height: 220px;">
-            <img src="https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=1200&q=80" alt="Вейпинг в России: факты и мифы" loading="lazy">
+            <img src="images/vape-article.jpg" alt="Вейпинг в России: факты и мифы" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -489,17 +573,17 @@
       </div>
     </section>
 
-    <!-- РАЗДЕЛ 2: ПРОДУКТОВЫЕ ОБЗОРЫ -->
+    <!-- РАЗДЕЛ 2: ТЕМАТИЧЕСКИЕ ОБЗОРЫ -->
     <section class="section">
       <div class="section-header">
-        <h2 class="section-title">Продуктовые обзоры (PrimeVapor Review)</h2>
-        <p class="section-desc">Опыт ведения тематического Telegram-канала: разбор характеристик, пользовательский опыт и честные вердикты</p>
+        <h2 class="section-title">Обзоры девайсов (PrimeVapor Review)</h2>
+        <p class="section-desc">Ведение тематического Telegram-канала: технический разбор устройств, баков, эргономики и вкусопередачи</p>
       </div>
 
       <div class="grid grid-2">
         <a href="https://t.me/PrimeVapor_Review/13" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=800&q=80" alt="Технический обзор #3" loading="lazy">
+            <img src="images/review-3.jpg" alt="Обзор устройства #3" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -507,9 +591,9 @@
                 <span class="badge highlight">PrimeVapor</span>
                 <span class="badge">Обзор девайса</span>
               </div>
-              <h3 class="card-title">Технический разбор и пользовательский опыт #3</h3>
+              <h3 class="card-title">Тест-драйв устройства: конструктив и эксплуатация #3</h3>
               <p class="card-snippet">
-                Тест-драйв устройства: эргономика, качество сборки, вкусопередача, нюансы эксплуатации и итоговая рекомендация.
+                Глубокий разбор эргономики, качества сборки, вкусопередачи, нюансов обслуживания и честный вердикт для пользователей.
               </p>
             </div>
             <div class="card-link">
@@ -521,7 +605,7 @@
 
         <a href="https://t.me/PrimeVapor_Review/12" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=800&q=80" alt="Технический обзор #2" loading="lazy">
+            <img src="images/review-2.jpg" alt="Обзор устройства #2" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -529,9 +613,9 @@
                 <span class="badge highlight">PrimeVapor</span>
                 <span class="badge">Обзор девайса</span>
               </div>
-              <h3 class="card-title">Технический разбор и пользовательский опыт #2</h3>
+              <h3 class="card-title">Тест-драйв устройства: автономность и затяжка #2</h3>
               <p class="card-snippet">
-                Оценка автономности, сценариев ежедневного использования, разбор конструктивных особенностей и сравнение с аналогами.
+                Оценка автономности батареи, регулировки обдува, сценариев ежедневного использования и сравнение с аналогами сегмента.
               </p>
             </div>
             <div class="card-link">
@@ -543,7 +627,7 @@
 
         <a href="https://t.me/PrimeVapor_Review/4" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Технический обзор #1" loading="lazy">
+            <img src="images/review-1.jpg" alt="Обзор устройства #1" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -551,9 +635,9 @@
                 <span class="badge highlight">PrimeVapor</span>
                 <span class="badge">Обзор девайса</span>
               </div>
-              <h3 class="card-title">Технический разбор и пользовательский опыт #1</h3>
+              <h3 class="card-title">Технический разбор: комплектация и опыт #1</h3>
               <p class="card-snippet">
-                Базовый обзор девайса: технические характеристики, распаковка, эргономика и поведение в реальной эксплуатации.
+                Детальный разбор комплектации, конструктива базы/картриджей, характеристик и реального поведения устройства при постоянном парении.
               </p>
             </div>
             <div class="card-link">
@@ -565,7 +649,7 @@
 
         <a href="https://t.me/PrimeVapor_Review" target="_blank" rel="noopener noreferrer" class="card">
           <div class="card-thumb">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="Telegram-канал PrimeVapor" loading="lazy">
+            <img src="images/channel.jpg" alt="Telegram-канал PrimeVapor Review" loading="lazy">
           </div>
           <div class="card-body">
             <div>
@@ -575,7 +659,7 @@
               </div>
               <h3 class="card-title">Канал @PrimeVapor_Review</h3>
               <p class="card-snippet">
-                Авторский ресурс с обзорами, инсайдами индустрии и обсуждениями с профильным сообществом.
+                Тематическая площадка с честными обзорами девайсов, баков, инсайдами рынка и активным взаимодействием с профильной аудиторией.
               </p>
             </div>
             <div class="card-link">
@@ -597,26 +681,26 @@
         <div class="skill-col">
           <h4>Тексты & Редактура</h4>
           <ul>
-            <li>Аналитические лонгриды и статьи[cite: 6]</li>
-            <li>Глубокий фактчекинг и поиск данных[cite: 4, 5]</li>
-            <li>Соблюдение редполитики и форматов[cite: 5]</li>
-            <li>Письмо без воды и канцелярита[cite: 5]</li>
+            <li>Аналитические лонгриды и статьи</li>
+            <li>Глубокий фактчекинг и поиск данных</li>
+            <li>Соблюдение редполитики и форматов</li>
+            <li>Письмо без воды и канцелярита</li>
           </ul>
         </div>
         <div class="skill-col">
-          <h4>Продукты & Контент</h4>
+          <h4>Нишевый контент</h4>
           <ul>
-            <li>Детальные обзоры техники и девайсов</li>
+            <li>Экспертные обзоры устройств и баков</li>
             <li>Ведение авторских Telegram-каналов</li>
-            <li>Понимание запросов аудитории[cite: 3, 5]</li>
-            <li>Адаптация сложной темы под читателя[cite: 5]</li>
+            <li>Понимание запросов и болей аудитории</li>
+            <li>Адаптация сложной темы под читателя</li>
           </ul>
         </div>
         <div class="skill-col">
           <h4>Условия сотрудничества</h4>
           <ul>
             <li>100% удаленный формат работы</li>
-            <li>Сдача текстов строго по дедлайнам[cite: 4, 13]</li>
+            <li>Сдача текстов строго по дедлайнам</li>
             <li>Оплата за объем задач / фикс</li>
             <li>Готовность к тестовому заданию</li>
           </ul>
@@ -630,13 +714,53 @@
         Ищете автора, который погружается в тему и сдает тексты в срок?
       </p>
       <div class="footer-contacts">
-        <a href="https://t.me/твой_юзернейм" target="_blank">Telegram: @твой_юзернейм</a>
-        <a href="mailto:Sphonegame2005@gmail.com">Email: Sphonegame2005@gmail.com</a>
+        <a href="https://t.me/твой_юзернейм" target="_blank" class="footer-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+          </svg>
+          Telegram: @твой_юзернейм
+        </a>
+
+        <div class="email-container" style="background: transparent; border-color: rgba(255,255,255,0.12);">
+          <div class="email-info">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span class="email-address">Sphonegame2005@gmail.com</span>
+          </div>
+          <button class="copy-btn" onclick="copyEmailToClipboard(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <span>Скопировать</span>
+          </button>
+        </div>
       </div>
       <p class="copyright">© Александр Понявин · Портфолио автора</p>
     </footer>
 
   </div>
 
+  <script>
+    function copyEmailToClipboard(button) {
+      const email = 'Sphonegame2005@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const textSpan = button.querySelector('span');
+        const originalText = textSpan.innerText;
+        
+        button.classList.add('copied');
+        textSpan.innerText = 'Скопировано!';
+        
+        setTimeout(() => {
+          button.classList.remove('copied');
+          textSpan.innerText = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+      });
+    }
+  </script>
 </body>
 </html>
